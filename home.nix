@@ -44,7 +44,10 @@
     ripgrep # recursively searches directories for a regex pattern
     mpv # media player
     wf-recorder # screen recorder
-    bitwarden-desktop # password manager
+    transmission_4 # bittorrent client
+    yazi # cli file manager
+    imagemagick # image editing cli tool
+    vesktop # discord client with vencord
 
     # misc
     file
@@ -52,19 +55,44 @@
     tree
     adwaita-icon-theme
     hyprcursor
+    poppler # pdf preview
 
     # system tools
     lm_sensors # for `sensors` command
     fastfetch # system fetch tool
 
-    # fonts
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.nerd-fonts.fantasque-sans-mono
-
     # language servers
     nixfmt-rfc-style # nix formatter
     nixd # official nix lsp
+    clang # c language compiler
+    clang-tools
+
+    # sway
+    sway
+
+    # fonts
+    # Nerd fonts
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.fantasque-sans-mono
+    # Serif fonts
+    liberation_ttf
+    dejavu_fonts
+    noto-fonts
+    noto-fonts-cjk-sans
+    # Sans-serif fonts
+    inter
+    fira
+    roboto
+    roboto-slab
+    open-sans
+    source-sans-pro
+    # Display & Special-Purpose fonts
+    iosevka
+    recursive
+
   ];
+
+  fonts.fontconfig.enable = true;
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -102,7 +130,7 @@
   # Enable Fish and create an alias for convenience
   programs.fish = {
     enable = true;
-    interactiveShellInit = "fish_config prompt choose simple";
+    interactiveShellInit = "set -gx EDITOR hx";
     shellAliases = {
       "kb-light" = "$HOME/.config/scripts/kb-light.fish";
     };

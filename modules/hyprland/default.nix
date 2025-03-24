@@ -16,11 +16,13 @@
       $menu = fuzzel
 
       # Autostart
+      # Fix gtk applications taking a lot of time to launch
+      exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once = hyprctl setcursor Adwaita 20
       exec-once = waybar & hyprpaper
 
       # Environment Variables
-      env = XCURSOR_SIZE,24
+      env = XCURSOR_SIZE,24 
       env = HYPRCURSOR_SIZE,24
 
       # Look and Feel
@@ -132,7 +134,7 @@
       misc {
         disable_autoreload = true
       }
-      
+
       # Keybinds
       $mainMod = SUPER
 
@@ -183,13 +185,14 @@
 
       # Screenshotting
       # Full display screenshot (Cmd + Shift + T)
-      bind = SUPER_SHIFT, T, exec, grim ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png
+      bind = $mainMod SHIFT, T, exec, grimblast --notify copysave screen
+      # bind = $mainMod SHIFT, T, exec, FILE_PATH=~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png; grim $FILE_PATH && wl-copy < $FILE_PATH
 
       # Selectable area screenshot (Cmd + Shift + R)
-      bind = SUPER_SHIFT, R, exec, grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png
+      bind = $mainMod SHIFT, R, exec, grimblast --notify copysave area
+      # bind = $mainMod SHIFT, R, exec, grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && wl-copy < ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png
 
 
-      
       # Laptop multimedia keys for volume and LCD brightness
       bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
       bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-

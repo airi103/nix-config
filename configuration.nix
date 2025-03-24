@@ -63,6 +63,17 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  # Firewall
+  networking.firewall.enable = true;
+  networking.firewall.rejectPackets = true;
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    9418
+    25565
+  ];
+  networking.firewall.logRefusedConnections = true;
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -84,6 +95,11 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  services.logind.extraConfig = ''
+    # Don’t shutdown when power button is short-pressed
+    HandlePowerKey=ignore
+  '';
 
   # Enable sound.
   # services.pulseaudio.enable = true;
@@ -123,13 +139,15 @@
     waybar
     # foot
     kitty
+    mako
     brightnessctl
     wl-clipboard
+    grimblast
     grim
     slurp
     fuzzel
-    sway
-    swayfx
+    # sway
+    # swayfx
     nwg-look
     fish
     inputs.signal-desktop.packages."${pkgs.system}".signal-desktop

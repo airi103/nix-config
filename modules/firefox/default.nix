@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   programs.firefox = {
@@ -9,7 +13,11 @@
       AppAutoUpdate = true;
       # Configure cookie preferences.
       Cookies = {
-        Allow = [ "https://pinterest.com/" "https://github.com/" "https://reddit.com" ];
+        Allow = [
+          "https://pinterest.com/"
+          "https://github.com/"
+          "https://reddit.com"
+        ];
         Locked = true;
         Behavior = "reject-tracker-and-partition-foreign";
       };
@@ -53,7 +61,7 @@
       ExtensionSettings = {
         "*" = {
           blocked_install_message = "Extension Installation Blocked by the policies.";
-          install_sources = [ "https://example.com/"];
+          install_sources = [ "https://example.com/" ];
           installation_mode = "blocked";
           allowed_types = [ "extension" ];
         };
@@ -64,6 +72,10 @@
         "{20fc2e06-e3e4-4b2b-812b-ab431220cada}" = {
           installation_mode = "force_installed";
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/startpage-private-search/latest.xpi";
+        };
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
         };
       };
       # Control extension updates.
@@ -110,7 +122,7 @@
         FirefoxLabs = false;
         Locked = true;
       };
-      
+
       # Configure search engines.
       # SearchEngines = {
       #   Default = "Startpage"; # Set Startpage as default.
@@ -128,7 +140,7 @@
       #   Remove = [ "Google" "Bing" ];
       #   LockDefault = true;
       # };
-      
+
       # Set and lock preferences.
       # See https://mozilla.github.io/policy-templates/
       Preferences = {
@@ -152,7 +164,17 @@
           Status = "default";
           Type = "boolean";
         };
+        "gfx.webrender.all" = {
+          Value = true;
+          Status = "default";
+          Type = "boolean";
+        };
+        "gfx.font_rendering.cleartype_params.rendering_mode" = {
+          Value = 5;
+          Status = "default";
+          Type = "integer";
+        };
       };
     };
-  };  
+  };
 }
